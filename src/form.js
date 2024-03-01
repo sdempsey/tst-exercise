@@ -29,7 +29,9 @@ export const Form = () => {
         e.preventDefault();
 
         if (!errors.username && !errors.password && !errors.confirm) {
-            setSubmitted(true);
+            if (values.username && values.password && values.confirm) {
+                setSubmitted(true);
+            }
         }
     };
 
