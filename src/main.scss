@@ -1,0 +1,174 @@
+@use 'sass:math';
+@use 'sass:color';
+
+@function rem($pxValue) {
+    @return math.div($pxValue, 16) + rem;
+}
+
+@import 'normalize.css';
+@import 'animate.css';
+
+$component-bg: #214884;
+$body-copy: #0f0f0f;
+$white: #fff;
+$error: #f00;
+$default-font-family: 'Open Sans', sans-serif;
+
+html {
+    box-sizing: border-box;
+    font-size: 100%;
+}
+
+*,
+:after,
+:before {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: $default-font-family;
+    color: $body-copy;
+    margin: 0;
+    height: 100vh;
+    font-size: 1rem;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+#root {
+    display: grid;
+    height: 100%;
+    grid-template-rows: auto 1fr auto;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1100px;
+    width: 100%;
+}
+
+.header {
+    align-items: center;
+    display: flex;
+    background-color: $component-bg;
+    padding: rem(15) rem(30);
+}
+
+.footer {
+    background-color: $component-bg;
+    color: $white;
+    font-size: rem(14);
+    padding: rem(15) rem(30);
+
+    a {
+        color: $white;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+.form {
+    max-width: 400px;
+    width: 100%;
+
+    &__field {
+        margin-bottom: rem(10);
+        padding-bottom: rem(20);
+        position: relative;
+    }
+
+    .error {
+        bottom: rem(-8);
+        color: $error;
+        font-size: rem(14);
+        left: 0;
+        margin: 0;
+        padding: rem(6) rem(6);
+        position: absolute;
+        width: 100%;
+    }
+
+    label {
+        padding: 0 rem(6);
+        font-size: rem(14);
+    }
+
+    label,
+    input,
+    .error {
+        display: block;
+    }
+
+    input:not([type='submit']) {
+        border: 2px solid $body-copy;
+        border-radius: 4px;
+        font-size: rem(14);
+        margin-top: rem(6);
+        outline: 0;
+        padding: 1rem rem(14);
+        transition: border 0.3s ease-in;
+        width: 100%;
+
+        &:hover,
+        &:focus {
+            border: 2px solid lighten($component-bg, 20%);
+        }
+
+        &:hover,
+        &:focus,
+        &.field-error {
+            transition: border 0.3s ease-out;
+        }
+
+        &.field-error {
+            background-color: lighten($error, 45%);
+            border: 2px solid $error;
+        }
+    }
+
+    &__submit {
+        background-color: lighten($component-bg, 20%);
+        border: 0;
+        border-radius: 4px;
+        color: $white;
+        cursor: pointer;
+        font-size: rem(18);
+        outline: 0;
+        padding: 0.75rem 1.5rem;
+        transition: background-color 0.3s ease-in;
+
+        &:hover,
+        &:focus {
+            background-color: lighten($component-bg, 25%);
+            transition: background-color 0.3s ease-out;
+        }
+    }
+}
+
+.success {
+    align-items: center;
+    animation-delay: 0.2s;
+    display: flex;
+
+    &__header {
+        margin-right: rem(8);
+    }
+
+    &__body {
+        font-size: rem(18);
+
+        p {
+            margin: 0;
+            line-height: 1.3;
+        }
+    }
+}
